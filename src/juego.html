@@ -1,0 +1,111 @@
+<html> 
+<head> 
+	<meta charset="UTF-8"> 
+	<title>Conecta 4</title> 
+    <link rel="stylesheet" href="tablero.css">
+	<style>@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	  }</style>
+</head> 
+
+<body> 
+	<div class="overlay" id="overlay">
+		<div class="loader"></div>
+		<div class="message">Cargando...</div>
+	  </div>
+	<h1>Conecta 4</h1> 
+	  <!-- Barra de pestañas -->
+	  <ul class="tabs">
+        <li id="profile-tab">  <a href="profile.html">Profile</a>
+		</li>
+        <li id="games-tab">  <a href="load-game.html">Games</a>
+		</li>
+		<li id="profile-off"> Sign off
+		</li>
+      
+    </ul>
+  <!-- Toggle para cambiar el turno actual del jugador -->
+  <div class="players">
+    <div class="player1 activered">Red</div>
+    <div class="player2">Yellow</div>
+  </div>
+	<table> 
+    <!-- 1a fila -->
+		<tr> 
+			<td class="cell col-0"></td> 
+			<td class="cell col-1"></td> 
+			<td class="cell col-2"></td> 
+			<td class="cell col-3"></td> 
+			<td class="cell col-4"></td> 
+			<td class="cell col-5"></td> 
+			<td class="cell col-6"></td> 
+		</tr> 
+    <!-- 2a fila -->
+		<tr> 
+			<td class="cell col-0"></td> 
+			<td class="cell col-1"></td> 
+			<td class="cell col-2"></td> 
+			<td class="cell col-3"></td> 
+			<td class="cell col-4"></td> 
+			<td class="cell col-5"></td> 
+			<td class="cell col-6"></td> 
+		</tr> 
+    <!-- 3a fila -->
+		<tr> 
+			<td class="cell col-0"></td> 
+			<td class="cell col-1"></td> 
+			<td class="cell col-2"></td> 
+			<td class="cell col-3"></td> 
+			<td class="cell col-4"></td> 
+			<td class="cell col-5"></td> 
+			<td class="cell col-6"></td> 
+		</tr> 
+    <!-- 4a fila -->
+		<tr> 
+			<td class="cell col-0"></td> 
+			<td class="cell col-1"></td> 
+			<td class="cell col-2"></td> 
+			<td class="cell col-3"></td> 
+			<td class="cell col-4"></td> 
+			<td class="cell col-5"></td> 
+			<td class="cell col-6"></td> 
+		</tr> 
+    <!-- 5a fila -->
+		<tr> 
+			<td class="cell col-0"></td> 
+			<td class="cell col-1"></td> 
+			<td class="cell col-2"></td> 
+			<td class="cell col-3"></td> 
+			<td class="cell col-4"></td> 
+			<td class="cell col-5"></td> 
+			<td class="cell col-6"></td> 
+		</tr> 
+    <!-- 6a fila -->
+		<tr> 
+			<td class="cell col-0"></td> 
+			<td class="cell col-1"></td> 
+			<td class="cell col-2"></td> 
+			<td class="cell col-3"></td> 
+			<td class="cell col-4"></td> 
+			<td class="cell col-5"></td> 
+			<td class="cell col-6"></td> 
+		</tr> 
+	</table> 
+	<div id="message"></div> 
+	<button id="restart-btn">Restart game</button> 
+
+	<button id="saveGameBtn" style="background-color: #4caf50; color: #fff; padding: 10px; border: none; border-radius: 4px; cursor: pointer;">
+        Save game
+    </button>
+
+	<button id="loadGameBtn" style="background-color: #4caf50; color: #fff; padding: 10px; border: none; border-radius: 4px; cursor: pointer;">
+        Load Game
+    </button>
+	
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+	<script src="game.js" type="module"></script>
+    <script src="juego.js" type="module"></script>
+
+</body> 
+</html>

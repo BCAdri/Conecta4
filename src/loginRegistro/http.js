@@ -121,6 +121,7 @@ async function updateData(URI, token, data) {
     Authorization: `Bearer ${token}`,
     Prefer: 'return=representation',
   };
+  console.log(data);
   const response = await supaRequest(url, 'PATCH', headersAux, data);
   return response;
 }
@@ -133,6 +134,7 @@ async function createData(URI, token, data) {
     Authorization: `Bearer ${token}`,
     Prefer: 'return=representation',
   };
+  console.log(data);
   const response = await supaRequest(url, 'post', headersAux, data);
   return response;
 }

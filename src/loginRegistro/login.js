@@ -44,12 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
           console.log(item.id+"---"+uid);
           if(item.id == uid){
             console.log(item.id+"---"+uid)
-
             trobat=true;
             break;
           }
         }
-      // Si el usuario no existe en la base de datos, crea un nuevo perfil
+      // Si el usuario es la primera vez que hace login, crea un nuevo perfil
         if (!trobat) {
           console.log("entra")
         const full_name = email.split('@')[0];

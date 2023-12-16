@@ -1,4 +1,4 @@
-import { loginSupabase,createData,getData } from "./http.js";
+import { loginSupabase,createData,getData, updateData } from "./http.js";
 //export { loginObject };
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -40,12 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(tableInfoArray)
       // Itera sobre la información del perfil para verificar si el perfil ya existe
         for(const item of tableInfoArray){
-          console.log(item+"---"+uid);
-          console.log(item.id+"---"+uid);
           if(item.id == uid){
             console.log(item.id+"---"+uid)
+
+            if (item.avatar_url === null &&
+              item.full_name === null &&
+              item.updated_at === null &&
+              item.username === null &&
+              item.website === null) {
+              break;
+          } else {
             trobat=true;
             break;
+          }
+  
           }
         }
       // Si el usuario es la primera vez que hace login, crea un nuevo perfil
@@ -54,12 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const full_name = email.split('@')[0];
         const username = email;
         const website ="";
-          await createData('profiles', dataLogin.access_token, {
-            id: uid,
+          
+        //Deberia actualizar el contenido del perfil si este es acabado de crear para asignar unos valores por defecto
+        /*await updateData('profiles', dataLogin.access_token, {
             username,
             full_name,
             website,
-        });
+        },uid);*/
         }
 
       // Almacena la información de inicio de sesión en el almacenamiento local

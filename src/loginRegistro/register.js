@@ -43,6 +43,7 @@ async function registerUser(email, password) {
     try {
         const dataRegister = await signUpSupabase(email, password);
         console.log("Contenido de dataRegister:", JSON.stringify(dataRegister, null, 2));
+        
        status.success = true;
 
     } catch (err) {

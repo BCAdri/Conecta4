@@ -111,11 +111,12 @@ async function getData(URI, token) {
   const url = `${SUPABASE_URL}/rest/v1/${URI}`;
   const headersAux = { ...headers, Authorization: `Bearer ${token}` };
   const data = await supaRequest(url, 'get', headersAux);
+  console.log(data);
   return data;
 }
 // Función para actualizar datos en Supabase
-async function updateData(URI, token, data) {
-  const url = `${SUPABASE_URL}/rest/v1/${URI}`;
+async function updateData(URI, token, data,id) {
+  const url = `${SUPABASE_URL}/rest/v1/${URI}/${id}`;
   const headersAux = {
     ...headers,
     Authorization: `Bearer ${token}`,
@@ -138,6 +139,7 @@ async function createData(URI, token, data) {
   const response = await supaRequest(url, 'post', headersAux, data);
   return response;
 }
+
 // Función para cerrar sesión en Supabase
 async function logoutSupabase(token) {
   const url = `${SUPABASE_URL}/auth/v1/logout`;

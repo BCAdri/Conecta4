@@ -4,6 +4,7 @@ import { restart } from "./restart.js";
 import { saveGame, gameState } from "./game.js";
 import { drawBoard,drawBoardLoad} from "./drawBoard.js";
 
+export {cellClicked,makeMove,isValidMove};
 addEventListener("DOMContentLoaded", () => {
   // Mostrar el overlay al cargar la página
   showOverlay();
@@ -70,6 +71,7 @@ function hideOverlay() {
   }
 
 
+})
   //Función que gestiona el evento de clic en una casilla
 
   function cellClicked(event, gameState) {
@@ -216,5 +218,3 @@ function hideOverlay() {
     }
     saveGame(gameState);
   }
-
-})

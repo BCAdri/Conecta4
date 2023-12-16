@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
         let trobat = false;
         console.log(tableInfoArray)
-      // Itera sobre la información del perfil para verificar si el usuario ya existe
+      // Itera sobre la información del perfil para verificar si el perfil ya existe
         for(const item of tableInfoArray){
           console.log(item+"---"+uid);
           console.log(item.id+"---"+uid);

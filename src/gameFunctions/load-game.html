@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+     
+        #lista-partidas {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+        }
+
+        #errores {
+            color: #fff;
+            background-color: #d9534f;
+            padding: 10px;
+            margin: 20px;
+            border-radius: 5px;
+        }
+
+        #numero-input {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #buscar-btn {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #5bc0de;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        #eliminar-juego-input {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #eliminar-juego-btn {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #d9534f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        .back {
+        background-color: #ccc;
+        color: #333;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .back:hover {
+        background-color: #bbb;
+    }
+
+    #pag{
+        text-align: center;
+    }
+    </style>
+</head>
+<body>
+    
+    <div id="lista-partidas"></div>
+    <div id="errores"></div>
+    <div id="pag">
+    <button id="prev">Previous</button>
+    <span id="currentPage">1</span>
+    <button id="next">Next</button>
+    </div>
+    <br>
+
+     <input type="number" id="numero-input" placeholder="What game do you want to load?">
+     <button id="buscar-btn">Select game</button>
+
+     <br>
+
+    <input type="number" id="eliminar-juego-input" placeholder="Enter game ID to delete">
+    <button id="eliminar-juego-btn">Delete game</button>
+
+    <button type="button" class="back" id="back">Back to the game</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="game.js" type="module"></script>
+
+    <script type="module">
+        import { showSavedGames, loadGame,gameState,deleteGame } from './game.js';
+        // Tamaño de la página y número de página actual para la paginación de partidas guardadas
+        let pageSize = 10;
+        let currentPage = 1
+
+        const listaPartidasDiv = document.getElementById('lista-partidas');
+        const erroresDiv = document.getElementById('errores');
+        const numeroInput = document.getElementById('numero-input');
+        const buscarBtn = document.getElementById('buscar-btn');
+        const eliminarJuegoInput = document.getElementById('eliminar-juego-input');
+        const eliminarJuegoBtn = document.getElementById('eliminar-juego-btn');
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+
+// Función asincrónica para mostrar las partidas guardadas y actualizar la paginación
+
+        async function displayGames() {
+
+        showSavedGames(currentPage - 1, pageSize).then(result => {
+            if (result.success) {
+                listaPartidasDiv.innerHTML = '';
+                listaPartidasDiv.appendChild(result.partidasDiv);
+                const currentPageSpan = document.getElementById('currentPage');
+                currentPageSpan.textContent = currentPage;
+            } else {
+                erroresDiv.textContent = result.errorMessage;
+            }
+        });
+    }// Evento de clic para la página anterior en la paginación
+        prev.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayGames();
+                }
+            });
+            // Evento de clic para la siguiente página en la paginación
+        next.addEventListener('click', () => {
+            currentPage++;
+            displayGames();
+        });
+        
+// Evento de clic para buscar una partida por número ingresado
+
+        buscarBtn.addEventListener('click', () => {
+            const numeroIngresado = parseInt(numeroInput.value);
+            
+
+            loadGame(numeroIngresado).then(result => {
+            if (!result.success) {
+                erroresDiv.textContent = result.errorMessage;
+            }else{
+                erroresDiv.textContent = result.errorMessage;
+                setTimeout(() => {
+                window.location.href = './juego.html';
+            }, 4000);
+            }
+
+             });
+        
+     });
+// Evento de clic para volver a la página de juego
+     document.querySelector('#back').addEventListener('click', () => {
+        window.location.href = './juego.html';
+    });
+// Evento de clic para eliminar una partida por ID ingresado
+    eliminarJuegoBtn.addEventListener('click', () => {
+            const idAEliminar = parseInt(eliminarJuegoInput.value);
+
+            deleteGame(idAEliminar).then(result => {
+                if (result.success) {
+                    erroresDiv.textContent = result.errorMessage; 
+                } else {
+                    erroresDiv.textContent = result.errorMessage; 
+                }
+
+                showSavedGames().then(result => {
+                    if (result.success) {
+                        listaPartidasDiv.innerHTML = ''; 
+                        listaPartidasDiv.appendChild(result.partidasDiv);
+                    } else {
+                        erroresDiv.textContent = result.errorMessage;
+                    }
+                });
+            });
+        });
+// Muestra las partidas al cargar la página
+        displayGames();
+
+    </script>
+  </body>
+</html>

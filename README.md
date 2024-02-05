@@ -26,6 +26,9 @@ Registro y Login:
 El juego cuenta con un sistema de registro y login, permitiendo a los jugadores crear y acceder a sus cuentas personalizadas.
 Los jugadores pueden iniciar sesión con sus credenciales y disfrutar de funciones personalizadas, como guardar partidas y actualizar su perfil.
 
+Paginacion: 
+
+Las partidas nos saldrán paginadas de 10 en 10, si tenemos menos no lo podremos comprobar.
 
 Reiniciar Partida:
 
@@ -40,7 +43,6 @@ Perfil del Jugador:
 
 Los jugadores tienen un perfil que incluye información como nombre de usuario, correo electrónico y otras características personalizadas.
 
-Cambio de Contraseña y Datos de Perfil:
 
 El jugador puede cambiar la contraseña de su cuenta y actualizar la información de su perfil, como nombre de usuario y avatar.
 
